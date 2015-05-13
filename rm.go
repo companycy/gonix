@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	recursivePtr := flag.Bool("r", false, "recursively rm")
+	recursivePtr := flag.Bool("r", false, "recursively delete a directory")
 
 	flag.Parse()
 
