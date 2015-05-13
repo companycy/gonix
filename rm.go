@@ -8,14 +8,21 @@ import (
 )
 
 func main() {
+	recursivePtr := flag.Bool("r", false, "recursively rm")
+
 	flag.Parse()
+
 	src, err := os.Stat(flag.Arg(0))
 	if err != nil {		// if existing
 		log.Fatal(err)
 	}
 
 	if src.IsDir() {
-		err = os.RemoveAll(flag.Arg(0)) // default with -r
+		if *recursivePtr {
+			err = os.RemoveAll(flag.Arg(0))
+		} else {
+			fmt.Printf("rm: %s: is a directory\n", flag.Arg(0))
+		}
 	} else {
 		err = os.Remove(flag.Arg(0))
 	}
